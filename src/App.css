@@ -4,3 +4,9 @@
 .sidebar{
     height: 500px;
 }
+.cardcss{
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+   
+}
