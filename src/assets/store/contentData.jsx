@@ -11,7 +11,7 @@ const postListreducer=(currentValue,action)=>{
 const PostListProvider =({children})=>{
     const [postlist,dispatchPostlist]=useReducer(postListreducer,DEFULAT_VALUE)
     const addPost =()=>{}
-    const deletePost =()=>{}
+    const deletePost =()=>{console.log(`maanoj`)}
     return(
         <Postlist.Provider value={{postlist,addPost,deletePost}}>
             {children}

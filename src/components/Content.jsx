@@ -1,9 +1,12 @@
+import { useContext } from "react";
 import { MdDelete } from "react-icons/md";
+import { Postlist } from "../store/contentData";
 const Content = ({props})=>{
+  const {deletePost}= useContext( Postlist)
     return(<div className="card " style={{width: "40rem",height:"300px",padding:"20px",margin:"10px"}}>
        
         <div className="card-body">
-           <button type="button" style={{float:"right",padding:"0 5px 10px 5px",fontSize:"25px"}} className="btn btn-primary position-relative " onClick={()=>{console.log(`delete by ${props.id}`)}}>
+           <button type="button" style={{float:"right",padding:"0 5px 10px 5px",fontSize:"25px"}} className="btn btn-primary position-relative " onClick={()=>{deletePost(props.id)}}>
            <MdDelete />
          </button>
         

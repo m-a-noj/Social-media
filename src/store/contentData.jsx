@@ -3,15 +3,21 @@ import { createContext, useReducer } from "react";
 export const Postlist =createContext({
     postlist:[],
     addPost:()=>{},
-    deletePost:()=>{}
+    deletePost:(id)=>{}
 })
 const postListreducer=(currentValue,action)=>{
-    return currentValue;
+    let newpost = currentValue
+    if (action.type === "DELETE_POST"){
+        newpost = currentValue.filter((post)=>post.id !== action.payload.id)
+    }
+    return newpost;
 }
 const PostListProvider =({children})=>{
     const [postlist,dispatchPostlist]=useReducer(postListreducer,DEFULAT_VALUE)
     const addPost =()=>{}
-    const deletePost =()=>{}
+    const deletePost =(id)=>{dispatchPostlist({type:"DELETE_POST",payload:
+        {id}
+    })}
     return(
         <Postlist.Provider value={{postlist,addPost,deletePost}}>
             {children}
