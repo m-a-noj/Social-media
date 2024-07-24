@@ -6,6 +6,7 @@ import CreateContent from './components/CreateContent'
 import DisplayContent from './components/DisplayContent'
 import Footer from './components/Footer';
 import "bootstrap/dist/css/bootstrap.min.css"
+import PostListProvider from './store/contentData'
 
 
 
@@ -13,6 +14,7 @@ function App() {
   const [selected, setSelected] = useState("")
 
   return (
+    <PostListProvider>
   <div className='container'>
     <Header></Header>
     <div className='content'>
@@ -25,7 +27,7 @@ function App() {
     
 
   </div>
-   
+  </PostListProvider>
   )
 }
 
