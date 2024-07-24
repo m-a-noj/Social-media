@@ -24,7 +24,7 @@ const DEFULAT_VALUE =[{
     title:"manoj is good ",
     description:"gfasdghjaksdfgh dasfgjasdjkf dasfjgh",
     reaction:"12",
-    hastag : "#enjoy #party"
+    hastag : ["#blodd" ,"#bloddy"]
 },
 {
     id:"2",
