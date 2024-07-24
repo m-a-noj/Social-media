@@ -4,22 +4,27 @@ import Header from './components/Header'
 import SideBar from './components/SideBar'
 import CreateContent from './components/CreateContent'
 import DisplayContent from './components/DisplayContent'
-import Footer from './components/Footer'
+import Footer from './components/Footer';
+import "bootstrap/dist/css/bootstrap.min.css"
+
 
 
 function App() {
-  const [count, setCount] = useState()
+  const [selected, setSelected] = useState("")
 
   return (
-  <>
+  <div className='container'>
     <Header></Header>
-    <SideBar></SideBar>
-    <CreateContent></CreateContent>
-    <DisplayContent></DisplayContent>
+    <div className='content'>
+    <SideBar selected={selected} setSelected={setSelected}></SideBar>
+    {selected === "home" ? (<DisplayContent></DisplayContent>):(<CreateContent></CreateContent>)}
+   
+   
+    </div>
     <Footer></Footer>
-  
+    
 
-  </>
+  </div>
    
   )
 }
