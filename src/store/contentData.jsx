@@ -15,7 +15,8 @@ const postListreducer=(currentValue,action)=>{
         newpost = [action.payload, ...currentValue];
     }
     else if (action.type === "FETCH_POST"){
-        newpost = action.payload.post;
+        newpost = action.payload.posts;
+        
   
     }
     return newpost;
@@ -36,16 +37,16 @@ const PostListProvider =({children})=>{
     const deletePost =(id)=>{dispatchPostlist({type:"DELETE_POST",payload:
         {id}
     })}
-    const fetchPost =(post)=>{
+    const fetchPost =(posts)=>{
        
-        dispatchPostlist({action:"FETCH_POST",
+        dispatchPostlist({type:"FETCH_POST",
             payload:{
-                post
+                posts,
         
-            } })
+            } });
         
 
-    }
+    };
     return(
         <Postlist.Provider value={{postlist,addPost,deletePost,fetchPost}}>
             {children}

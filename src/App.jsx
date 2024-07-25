@@ -15,6 +15,7 @@ function App() {
 
   return (
     <PostListProvider>
+      
   <div className='container'>
     <Header></Header>
     <div className='content'>
