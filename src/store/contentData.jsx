@@ -3,6 +3,7 @@ import { createContext, useReducer } from "react";
 export const Postlist =createContext({
     postlist:[],
     addPost:()=>{},
+    fetchPost:()=>{},
     deletePost:(id)=>{}
 })
 const postListreducer=(currentValue,action)=>{
@@ -13,10 +14,14 @@ const postListreducer=(currentValue,action)=>{
     else if (action.type === "ADDPOST"){
         newpost = [action.payload, ...currentValue];
     }
+    else if (action.type === "FETCH_POST"){
+        newpost = action.payload.post;
+  
+    }
     return newpost;
 }
 const PostListProvider =({children})=>{
-    const [postlist,dispatchPostlist]=useReducer(postListreducer,DEFULAT_VALUE)
+    const [postlist,dispatchPostlist]=useReducer(postListreducer,[])
     const addPost =(postTitle,postContent,noOfReaction, hashtag,userId)=>{
         dispatchPostlist({type :"ADDPOST",payload:{
     id:Date.now(),
@@ -31,22 +36,21 @@ const PostListProvider =({children})=>{
     const deletePost =(id)=>{dispatchPostlist({type:"DELETE_POST",payload:
         {id}
     })}
-    
+    const fetchPost =(post)=>{
+       
+        dispatchPostlist({action:"FETCH_POST",
+            payload:{
+                post
+        
+            } })
+        
+
+    }
     return(
-        <Postlist.Provider value={{postlist,addPost,deletePost}}>
+        <Postlist.Provider value={{postlist,addPost,deletePost,fetchPost}}>
             {children}
         </Postlist.Provider>
     )}
    
 
 export default PostListProvider;
-const DEFULAT_VALUE =[{
-    id:"",
-    title:" ",
-    description:"",
-    reaction:"",
-    userid:"",
-    hastag : []
-}
-
-]
