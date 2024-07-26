@@ -17,8 +17,7 @@ const postListreducer=(currentValue,action)=>{
   
     }
     else if (action.type === "ADDPOST"){
-        console.log(action.payload.posts);
-     
+       
         newpost = [action.payload.posts, ...currentValue];
     }
    
