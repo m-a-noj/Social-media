@@ -18,18 +18,31 @@ function CreateContent() {
     const postContent = postContentl.current.value;
     const noOfReaction = noOfReactionl.current.value;
     const hashtag = hastagl.current.value.split(" ");
-    const userId = useridl.current.value
-   
-     addPost(postTitle,postContent,noOfReaction,hashtag,userId);
-
-    
-  
-    PostTitlel.current.value = "";
+    const userId = useridl.current.value;
+    /*PostTitlel.current.value = "";
     postContentl.current.value = "";
     noOfReactionl.current.value = "";
     hastagl.current.value = "";
-    useridl.current.value = "";
-  };
+    useridl.current.value = "";*/
+    
+    fetch('https://dummyjson.com/posts/add', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title:postTitle,
+        body:postContent,
+        tags:hashtag,
+        userId:userId,
+        reactions:noOfReaction
+      })
+    })
+    .then(res => res.json())
+    .then(posts=>addPost(posts));
+}
+    
+  
+ 
+  
 
   return (
     <form style={{ margin: "40px", width: "50%" }} onSubmit={handleOnClick}>

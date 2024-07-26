@@ -1,9 +1,9 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer,useState,useEffect } from "react";
 
 export const Postlist =createContext({
     postlist:[],
     addPost:()=>{},
-    fetchPost:()=>{},
+    fetchingStatus:Boolean,
     deletePost:(id)=>{}
 })
 const postListreducer=(currentValue,action)=>{
@@ -11,26 +11,27 @@ const postListreducer=(currentValue,action)=>{
     if (action.type === "DELETE_POST"){
         newpost = currentValue.filter((post)=>post.id !== action.payload.id)
     }
-    else if (action.type === "ADDPOST"){
-        newpost = [action.payload, ...currentValue];
-    }
     else if (action.type === "FETCH_POST"){
         newpost = action.payload.posts;
         
   
     }
+    else if (action.type === "ADDPOST"){
+        console.log(action.payload.posts);
+     
+        newpost = [action.payload.posts, ...currentValue];
+    }
+   
     return newpost;
 }
 const PostListProvider =({children})=>{
     const [postlist,dispatchPostlist]=useReducer(postListreducer,[])
-    const addPost =(postTitle,postContent,noOfReaction, hashtag,userId)=>{
+    const [fetchingStatus,setFatchingStatus] = useState(true);
+    const addPost =(posts)=>{
+        
         dispatchPostlist({type :"ADDPOST",payload:{
-    id:Date.now(),
-    title: postTitle,
-    description:postContent,
-    reaction:noOfReaction,
-    hastag :hashtag,
-    userid: userId
+    
+    posts
 
         }})
     }
@@ -47,8 +48,18 @@ const PostListProvider =({children})=>{
         
 
     };
+    
+    useEffect(
+    ()=>{setFatchingStatus(true);
+        fetch('https://dummyjson.com/posts')
+        .then(res => res.json())
+        .then(list=>{ fetchPost(list.posts),
+            setFatchingStatus(false);
+        })
+       
+    },[Postlist])
     return(
-        <Postlist.Provider value={{postlist,addPost,deletePost,fetchPost}}>
+        <Postlist.Provider value={{postlist,addPost,deletePost,fetchingStatus}}>
             {children}
         </Postlist.Provider>
     )}

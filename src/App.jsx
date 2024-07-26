@@ -11,7 +11,7 @@ import PostListProvider from './store/contentData'
 
 
 function App() {
-  const [selected, setSelected] = useState("")
+  const [selected, setSelected] = useState("home")
 
   return (
     <PostListProvider>
